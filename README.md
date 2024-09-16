@@ -9,6 +9,15 @@
    1) ChatGPT API Key를 발급 받아야함.
 2. Dall-e, Midjourney 등 생성형 AI 등에 대한 프롬프트 엔지니어링 수행
 
+
+## 이미지의 종류
+1. Chairs
+2. Stools & benches
+3. Dining tables
+4. Cafe tables
+5. Desk
+6. Lighting
+
 <br>
 
 ![Alt Text](77_images/whitecat_withagoodstart.png)

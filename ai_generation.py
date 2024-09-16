@@ -28,8 +28,8 @@ def generate_image_from_prompt(image_path, output_path, furniture):
     The final image should feature the new {furniture} against a clean white studio background with soft, 
     even lighting, presented in a style suitable for display on an online sales website.
    ''',
-           'negative_prompt': "Never make it into two separate images.",
-           'fidelity': 1,
+           'negative_prompt': "Never make two separate furniture. Do not put anything above the furniture.",
+           'fidelity': 0.5,
             "output_format": "png"
         },
     )

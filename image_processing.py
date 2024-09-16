@@ -40,17 +40,17 @@ def image_concater(first_image_path, second_image_path, output_path):
     print(f"Combined image saved at {output_path}")
 
 # 랜덤 페어 생성
-def random_pair(image_set_folder, output_folder):
-    # 폴더 안에 'essence', 'furniture' 두 폴더에서 각각 하나의 이미지를 선택하여 결합
-    essence_images = os.listdir(os.path.join(image_set_folder, 'essence'))
-    furniture_images = os.listdir(os.path.join(image_set_folder, 'furniture'))
+def random_pair(first_image_set, second_image_set, output_folder):
+    # 폴더 안에 essence와, 가구 두 폴더에서 각각 하나의 이미지를 선택하여 결합
+    essence_images = os.listdir(os.path.join(first_image_set))
+    furniture_images = os.listdir(os.path.join(second_image_set))
     essence_image = random.choice(essence_images)
     furniture_image = random.choice(furniture_images)
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
     # 이미지 경로 설정
-    first_image = os.path.join(image_set_folder, 'essence', essence_image)
-    second_image = os.path.join(image_set_folder, 'furniture', furniture_image)
+    first_image = os.path.join(first_image_set, essence_image)
+    second_image = os.path.join(second_image_set, furniture_image)
     # output full path to be saved
     output_path = os.path.join(output_folder, f'{timestamp}_combined.png')
 
