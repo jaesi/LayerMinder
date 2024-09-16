@@ -40,6 +40,38 @@ def generate_image_from_prompt(image_path, output_path, furniture):
     else: # error -> print error message
         raise Exception(str(response.json()))
 
+# Upcycling images
+def upcycle_image_from_prompt(image_path, output_path, furniture):
+    # Stability AI API
+    response = requests.post(
+        "https://api.stability.ai/v2beta/stable-image/control/style",
+        headers={
+            "authorization": STABILITY_KEY,
+            "accept": "image/*"
+        },
+        files={
+            "image": open(image_path, "rb"),
+        },
+        data={
+            "prompt": f'''
+    You are a professional furniture designer. 
+    Please seamlessly combine elements from image to design a new, unique piece of {furniture}. 
+    Left-picture(0.9) is the part of the furniture, and use it for upcycling and don't change the shape of the left furniture.
+    The final image should feature the new {furniture} against a clean white studio background with soft, 
+    even lighting, presented in a style suitable for display on an online sales website.
+   ''',
+           'negative_prompt': "Never make two separate furniture. Do not put anything above the furniture.",
+           'fidelity': 0.5,
+            "output_format": "png"
+        },
+    )
+    if response.status_code == 200: # successes -> file save 
+        with open(output_path, 'wb') as file:
+            file.write(response.content)
+        print(f"Image saved successfully: {output_path}")
+    else: # error -> print error message
+        raise Exception(str(response.json()))
+
 
 # image to url
 def image_to_base64(image_path):

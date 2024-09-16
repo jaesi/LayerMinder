@@ -37,7 +37,7 @@ def image_concater(first_image_path, second_image_path, output_path):
         combined_image.paste(image2, (0, image1.height+ separation))
 
     combined_image.save(output_path)
-    print(f"Combined image saved at {output_path}")
+    print(f"Combined image saved at {output_path})")
 
 # 랜덤 페어 생성
 def random_pair(first_image_set, second_image_set, output_folder):
