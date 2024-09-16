@@ -14,10 +14,12 @@ from ai_generation import generate_image_from_prompt, image_to_base64, describe_
 # 5. Desk
 # 6. Lighting
 
-def main():
+def main(ef, ff):
     # 폴더 이름 설정
-    essence_image_set = "Verner Panton" # style setting
-    furniture_image_set = "wood_table" # type of furniture to create
+#    essence_image_set = "Verner Panton" # style setting
+#    furniture_image_set = "wood_table" # type of furniture to create
+    essence_image_set = ef
+    furniture_image_set = ff
     furniture = str.split(furniture_image_set, '_')[1] # type of furniture to create
 
     essence_image_folder = os.path.join("00_ref", essence_image_set)
@@ -42,5 +44,22 @@ def main():
         # 4. 설명을 기반으로 도면 생성
         # create_furniture_top_view(description)
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
+
+
+# 반복을 통해서 생성 수행 
+# 1. essence 폴더셋
+essence_folder = ['balanciaga', 'creative', 'experimental', 'JasperMorrison', 'Jean Prouve', 
+                  'materials', 'modernism', 'real_modern', 'red', 'ruggy']
+# 2. furniture 폴더셋
+furniture_folder =['color_sofa', 'modern_chair', 'modern_coffeetable', 'steel&wood_chair',  'wood_stool',
+                   'stone_coffetable', 'wood_bench', 'wood_chair', 'wood_coffeetable', 'wood_shelf']
+
+# 랜덤으로 짝을 만들어서 이미지 생성
+import random
+for i in range(30):
+    ef = random.choice(essence_folder)
+    ff = random.choice(furniture_folder)
+    main(ef, ff)
+    print(f"Completed: {ef}X{ff}")
