@@ -16,9 +16,9 @@ from ai_generation import generate_image_from_prompt, image_to_base64, describe_
 
 def main():
     # 폴더 이름 설정
-   essence_image_set = "wooden_chair" # style setting
-   furniture_image_set = "wooden_chair" # type of furniture to create
-   furniture = str.split(furniture_image_set, '_')[1] # type of furniture to create
+    essence_image_set = "woodennatural" # style setting
+    furniture_image_set = "woodennatural_coffeetable" # type of furniture to create
+    furniture = str.split(furniture_image_set, '_')[1] # type of furniture to create
    
     essence_image_folder = os.path.join("00_ref", essence_image_set)
     furniture_image_folder = os.path.join("00_ref", furniture_image_set)
@@ -26,7 +26,7 @@ def main():
     os.makedirs(output_folder, exist_ok=True)
     
     cycle = 8
-    length = 5
+    length = 3
     
     for a in range(cycle):   
         # 1. 이미지 두 개를 무작위로 선택하고 결합

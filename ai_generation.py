@@ -23,15 +23,16 @@ def generate_image_from_prompt(image_path, output_path, furniture):
         },
         data={
             "prompt": f'''
-    You are a professional furniture designer. 
-    Please seamlessly combine elements from image to design a new, unique piece of {furniture}.
-    All Materials should be wood or 90% wood(0.9). 
-    Keep the key style of the given furniture and make it unique.
-    Get the shape from the image furniture.
-    The final image should feature the new {furniture} against a clean white studio background with soft, 
-    even lighting, presented in a style suitable for display on an online sales website.
-   ''',
-           'negative_prompt': "Never make two separate furniture. Do not put anything above the furniture.",
+            Combine these two image into one thing.
+            All materials should be wood or 90% wood (0.9). 
+            Details should be minimalistic and bold(0.8), with a clean, modern(0.9) aesthetic.
+            Take the key design concepts from the given image while keeping the essential style unique.
+            If the original image has a non-round top, maintain the original shape.
+            The final image should be on against a clean white studio background with soft, 
+            even lighting.
+            ''',
+           'negative_prompt': '''
+           ''',
            'fidelity': 0.9,
             "output_format": "png"
         },
