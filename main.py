@@ -16,26 +16,31 @@ from ai_generation import generate_image_from_prompt, image_to_base64, describe_
 
 def main():
     # 폴더 이름 설정
-   essence_image_set = "pinky" # style setting
-   furniture_image_set = "wood_coffeetable" # type of furniture to create
+   essence_image_set = "wooden_chair" # style setting
+   furniture_image_set = "wooden_chair" # type of furniture to create
    furniture = str.split(furniture_image_set, '_')[1] # type of furniture to create
    
-   essence_image_folder = os.path.join("00_ref", essence_image_set)
-   furniture_image_folder = os.path.join("00_ref", furniture_image_set)
-   output_folder = os.path.join("88_output", f'{essence_image_set}X{furniture_image_set}')
-   os.makedirs(output_folder, exist_ok=True)
+    essence_image_folder = os.path.join("00_ref", essence_image_set)
+    furniture_image_folder = os.path.join("00_ref", furniture_image_set)
+    output_folder = os.path.join("88_output", f'{essence_image_set}X{furniture_image_set}')
+    os.makedirs(output_folder, exist_ok=True)
     
-   # 1. 이미지 두 개를 무작위로 선택하고 결합
-   combined_image_path = random_pair(essence_image_folder, furniture_image_folder, output_folder)
+    cycle = 8
+    length = 5
+    
+    for a in range(cycle):   
+        # 1. 이미지 두 개를 무작위로 선택하고 결합
+        combined_image_path = random_pair(essence_image_folder, furniture_image_folder, output_folder)
 
-   # 2. Stability AI를 사용하여 새로운 가구 이미지 생성
-   count = 0
-   for i in range(3): # 이미지 세 장 생성
-        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        generated_image_path = os.path.join(output_folder, f"{timestamp}_{essence_image_set}_{furniture_image_set}.png")
-        generate_image_from_prompt(combined_image_path, generated_image_path, furniture) 
-        count += 1
-        print(f"{count}/3")
+        # 2. Stability AI를 사용하여 새로운 가구 이미지 생성
+        count = 0
+
+        for i in range(length): # 이미지 세 장 생성
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            generated_image_path = os.path.join(output_folder, f"{timestamp}_{essence_image_set}_{furniture_image_set}.png")
+            generate_image_from_prompt(combined_image_path, generated_image_path, furniture) 
+            count += 1
+            print(f"{count}/{length}")
 
         # 3. 생성된 이미지를 OpenAI를 사용하여 설명 생성
         # image_url = image_to_base64(generated_image_path)
@@ -46,7 +51,7 @@ def main():
         # create_furniture_top_view(description)
 
 if __name__ == "__main__":
-   main()
+  main()
 
 
 # # 반복을 통해서 생성 수행 
@@ -57,10 +62,11 @@ if __name__ == "__main__":
 # furniture_folder =['color_sofa', 'modern_chair', 'modern_coffeetable', 'steel&wood_chair',  'wood_stool',
 #                    'stone_coffetable', 'wood_bench', 'wood_chair', 'wood_coffeetable', 'wood_shelf']
 
-# # 랜덤으로 짝을 만들어서 이미지 생성
+# 랜덤으로 짝을 만들어서 이미지 생성
 # import random
-# for i in range(30):
+# for i in range(10):
 #     ef = random.choice(essence_folder)
 #     ff = random.choice(furniture_folder)
 #     main(ef, ff)
 #     print(f"Completed: {ef}X{ff}")
+
