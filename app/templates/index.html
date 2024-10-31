@@ -1,0 +1,17 @@
+<!-- app/templates/index.html -->
+{% extends "layout.html" %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    <label for="furniture">가구 설명:</label>
+    <input type="text" id="furniture" name="furniture" required>
+    <br><br>
+    
+    <label for="image">이미지 업로드:</label>
+    <input type="file" id="image" name="image" accept="image/*" required>
+    <br><br>
+    
+    <button type="submit" name="action" value="generate">이미지 생성</button>
+    <button type="submit" name="action" value="upcycle">이미지 업사이클</button>
+</form>
+{% endblock %}
