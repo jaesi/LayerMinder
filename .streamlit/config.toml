@@ -1,0 +1,8 @@
+
+[theme]
+base="light"  # "light" 또는 "dark"
+primaryColor="#1E90FF"  # 주 색상 (파란색 예시)
+backgroundColor="#FFFFFF"  # 배경 색상
+secondaryBackgroundColor="#FF9966"  # 보조 배경 색상
+textColor="#262730"  # 텍스트 색상 (어두운 회색)
+font="sans serif"  # 폰트 종류 ("sans serif", "serif", "monospace")
