@@ -81,3 +81,4 @@ def combine_with_style(user_image_path, style_image_set_folder, output_folder):
     except Exception as e:
         print(f"스타일 이미지 결합 중 오류 발생: {e}")
         raise
+    return output_path

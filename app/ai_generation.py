@@ -10,9 +10,7 @@ STABILITY_KEY = os.getenv('STABILITYAI_API_KEY')
 OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 
 # Stability AI를 사용하여 새로운 이미지 생성
-
-def generate_image_from_prompt(image_path, output_path):
-
+def generate_image_from_prompt(image_path, output_path, furniture):
     # Stability AI API
     response = requests.post(
         "https://api.stability.ai/v2beta/stable-image/control/style",
@@ -35,8 +33,7 @@ def generate_image_from_prompt(image_path, output_path):
             ''',
            'negative_prompt': '''
            ''',
-           'fidelity': 0.9,
-
+           'fidelity': 1.0,
             "output_format": "png"
         },
     )

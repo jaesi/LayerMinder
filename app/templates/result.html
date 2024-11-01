@@ -1,0 +1,12 @@
+<!-- app/templates/result.html -->
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>생성된 이미지</h2>
+    <img src="{{ image_url }}" alt="Generated Image" class="generated-image">
+    
+    <h2>가구 설명</h2>
+    <p>{{ description }}</p>
+    
+    <a href="{{ url_for('main.index') }}">다시 생성하기</a>
+{% endblock %}
