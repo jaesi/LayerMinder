@@ -1,6 +1,6 @@
 import os
 import datetime
-from image_processing import random_pair
+from app.image_processing import random_pair
 from ai_generation import generate_image_from_prompt, image_to_base64, describe_furniture
 # from make_drawing import create_furniture_top_view
 

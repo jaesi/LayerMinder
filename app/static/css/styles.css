@@ -62,3 +62,9 @@ button:hover {
     color: red;
     text-align: center;
 }
+
+.furniture-description {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: left;
+}
