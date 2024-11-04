@@ -4,10 +4,17 @@ from dotenv import load_dotenv
 import datetime
 import base64
 import mimetypes
+import openai
 
 load_dotenv()
 STABILITY_KEY = os.getenv('STABILITYAI_API_KEY')
 OPENAI_KEY = os.getenv("OPENAI_API_KEY")
+
+
+if not OPENAI_KEY:
+    raise RuntimeError("OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.")
+
+openai.api_key = OPENAI_KEY
 
 # Stability AI를 사용하여 새로운 이미지 생성
 def generate_image_from_prompt(image_path, output_path, furniture):
@@ -92,36 +99,37 @@ def image_to_base64(image_path):
 
 # OpenAI를 사용하여 이미지 설명 생성
 def describe_furniture(image_url):
-    import openai
-    openai.api_key = OPENAI_KEY
-    
-    client = openai()
+    """
+    OpenAI API를 사용하여 이미지에 대한 설명을 생성하는 함수
+    """
+    try:
+        prompt = '''
+        Please provide a detailed description of the furniture in the image, including materials, colors, sizes, and thicknesses for each part of the furniture. All measurements should be in millimeters (mm). Prioritize the top surface of the furniture for initial drafting. Describe the shape of the top surface as accurately as possible, including all dimensions and details.
 
-    prompt = '''
-    Please provide a detailed description of the furniture in the image, including materials, colors, sizes, and thicknesses for each part of the furniture. All measurements should be in millimeters (mm). Prioritize the top surface of the furniture for initial drafting. Describe the shape of the top surface as accurately as possible, including all dimensions and details.
+        Focus on each part of the furniture, providing specific information on:
 
-    Focus on each part of the furniture, providing specific information on:
+        1. Top Surface: Material, color, shape, dimensions, and thickness.
+        2. Legs: Material, color, height, width, and thickness.
+        3. Frame: Material, color, dimensions, and thickness.
+        4. Additional Elements: Any other parts, like shelves or drawers, with their materials, colors, dimensions, and thicknesses.
 
-    1. Top Surface: Material, color, shape, dimensions, and thickness.
-    2. Legs: Material, color, height, width, and thickness.
-    3. Frame: Material, color, dimensions, and thickness.
-    4. Additional Elements: Any other parts, like shelves or drawers, with their materials, colors, dimensions, and thicknesses.
+        Make sure the description is precise, detailed, and comprehensive to ensure the drawing captures all the essential characteristics of the furniture.
+        '''
 
-    Make sure the description is precise, detailed, and comprehensive to ensure the drawing captures all the essential characteristics of the furniture.
-    '''
+        response = openai.chat.completions.create(
+            model="gpt-4",  # "gpt-4o"는 올바른 모델명이 아닙니다.
+            messages=[
+                {"role": "system", "content": "You are a furniture designer."},
+                {
+                    "role": "user",
+                    "content": prompt,
+                    # 'attachments'는 OpenAI Chat API에서 지원되지 않습니다.
+                }
+            ],
+            max_tokens=500,
+        )
 
+        return response.choices[0].message.content
 
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": "You are a furniture designer."},
-            {
-                "role": "user",
-                "content": prompt,
-                "attachments": [{"type": "image", "url": image_url}]
-            }
-        ],
-        max_tokens=500,
-    )
-
-    return response.choices[0].message.content
+    except Exception as e:
+        raise Exception(f"설명 생성 실패: {e}")

@@ -13,11 +13,13 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+# @: Decorator
 @main.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        # 폼 데이터 받기
-        furniture = request.form.get('furniture')
+        # 폼 데이터 받기: furniture, action, image
+        furniture = request.form.get('furniture') # 사용자가 입력한 가구 설명을 가져온다. (ex. "a chair with a table lamp on it")
         action = request.form.get('action')  # 'generate' or 'upcycle'
 
         # 파일 받기
@@ -55,11 +57,11 @@ def index():
                 # OpenAI API를 사용하여 설명 생성
                 description = describe_furniture(image_url)
 
-                return render_template('result.html', image_url=image_url, description=description)
+                return render_template('result.html', image_url=image_url, description=description) # render_template를 통해 html과 연결
             except Exception as e:
                 flash(f'Error: {e}')
                 return redirect(request.url)
         else:
             flash('Allowed file types are png, jpg, jpeg, gif')
             return redirect(request.url)
-    return render_template('index.html')
+    return render_template('index.html') # render_template를 통해 html과 연결
