@@ -90,7 +90,7 @@ def describe_furniture(image_url):
         '''
 
         response = openai.chat.completions.create(
-            model="gpt-4o",  
+            model="gpt-4o-mini",  
             messages=[
                 {"role": "system", "content": "You are a furniture designer."},
                 {
@@ -106,7 +106,7 @@ def describe_furniture(image_url):
                     ],
                 }
             ],
-            max_tokens=500,
+            max_tokens=300,
         )
 
         return response.choices[0].message.content
