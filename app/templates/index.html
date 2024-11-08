@@ -1,17 +1,26 @@
 <!-- app/templates/index.html -->
 {% extends "layout.html" %}
+<!-- layout.html에서 상속을 받아 구조를 기반으로 한다-->
 
 {% block content %}
-<form method="POST" enctype="multipart/form-data">
-    <label for="furniture">가구 설명:</label>
-    <input type="text" id="furniture" name="furniture" required>
-    <br><br>
+
+<!-- enctype: 폼 데이터를 인코딩하는 방법 지정: 파일 업로드를 포함하는 폼의 경우 : multipart/form-data 사용-->
+<form method="POST" enctype="multipart/form-data"> <!-- form데이터를 서버로 전송할 때, POST메소드를 사용함 / 안전하게 전송하며 데이터가 URL에 노출되지 않음-->
+    
+    <!-- 가구 스타일 선택란-->
+    <label for="style_set">스타일 선택:</label>
+    <select id="style_set" name="style_set" required>
+        {% for style in style_sets %}
+            <option value="{{ style }}">{{ style }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br> <!--줄바꿈 2번으로 가독성 향상-->
     
     <label for="image">이미지 업로드:</label>
     <input type="file" id="image" name="image" accept="image/*" required>
-    <br><br>
+    <br><br> <!--줄바꿈 2번으로 가독성 향상-->
     
     <button type="submit" name="action" value="generate">이미지 생성</button>
-    <button type="submit" name="action" value="upcycle">이미지 업사이클</button>
 </form>
 {% endblock %}
