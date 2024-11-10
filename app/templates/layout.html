@@ -5,20 +5,18 @@
     <meta charset="UTF-8">
     <title>가구 이미지 생성형 AI 서비스</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
 </head>
 <body>
-    <div class="container">
-        <h1>Foundry Testbed Furniture Maker</h1>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class="flashes">
-              {% for message in messages %}
-                <li>{{ message }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
-    </div>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="flashes">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
 </body>
 </html>

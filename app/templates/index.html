@@ -1,26 +1,44 @@
-<!-- app/templates/index.html -->
 {% extends "layout.html" %}
 <!-- layout.html에서 상속을 받아 구조를 기반으로 한다-->
 
 {% block content %}
+<!-- Foundary 로고 -->
+<header class="header">
+    <h1>• Foundary</h1>
+</header>
 
-<!-- enctype: 폼 데이터를 인코딩하는 방법 지정: 파일 업로드를 포함하는 폼의 경우 : multipart/form-data 사용-->
-<form method="POST" enctype="multipart/form-data"> <!-- form데이터를 서버로 전송할 때, POST메소드를 사용함 / 안전하게 전송하며 데이터가 URL에 노출되지 않음-->
-    
-    <!-- 가구 스타일 선택란-->
-    <label for="style_set">스타일 선택:</label>
-    <select id="style_set" name="style_set" required>
-        {% for style in style_sets %}
-            <option value="{{ style }}">{{ style }}</option>
-        {% endfor %}
-    </select>
+<div class="container">
+    <div class="upload-section">
+        <div class="drop-area" id="drop-area">
+            <img src="/static/upload-icon.png" alt="Upload Icon" class="upload-icon">
+            <p>Drop picture here or <label for="image" class="browse-link">Browse</label></p>
+            <input type="file" id="image" name="image" accept="image/*" required style="display:none;">
+        </div>
+    </div>
 
-    <br><br> <!--줄바꿈 2번으로 가독성 향상-->
-    
-    <label for="image">이미지 업로드:</label>
-    <input type="file" id="image" name="image" accept="image/*" required>
-    <br><br> <!--줄바꿈 2번으로 가독성 향상-->
-    
-    <button type="submit" name="action" value="generate">이미지 생성</button>
-</form>
+    <!-- 스타일 선택 영역 -->
+    <form method="POST" action="/" enctype="multipart/form-data"> <!-- 폼 태그 추가 -->
+        <div class="style-selection">
+            <h3>Customize Style</h3>
+            <div class="style-carousel">
+                <div class="style-carousel-inner">
+                    {% for style in style_sets %}
+                        <div class="style-item" data-style="{{ style }}" onclick="selectStyle('{{ style }}')">
+                            <img src="{{ url_for('static', filename=style_previews[style]) }}" alt="{{ style }}">
+                            <p>{{ style }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- 선택된 스타일을 서버로 전송할 숨겨진 입력 필드 -->
+        <input type="hidden" name="style_set" id="style_set"> 
+
+        <!-- 이미지 생성 버튼 -->
+        <button type="submit" name="action" value="generate" class="generate-button">Generate</button>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
 {% endblock %}
