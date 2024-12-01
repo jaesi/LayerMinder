@@ -24,8 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 파일 선택 창 열기
-    dropArea.addEventListener("click", () => fileInput.click());
+
 
     // 파일 선택 시 미리보기 업데이트
     fileInput.addEventListener("change", (event) => {
@@ -45,16 +44,32 @@ document.addEventListener("DOMContentLoaded", function () {
             imagePreview.classList.add("preview-image");
 
             // 이전 내용 제거 후 새 이미지 추가
-            dropArea.innerHTML = ""; 
+            dropArea.innerHTML = "";
             dropArea.appendChild(imagePreview);
         };
         reader.readAsDataURL(file);
     }
-
-    // 스타일 선택 함수
-    function selectStyle(style) {
-        console.log("Selected style:", style); // 콘솔에 선택한 스타일 출력
-        document.getElementById("style_set").value = style; // 선택된 스타일을 숨겨진 input에 설정
-    }
     
+    // 스타일 선택 함수
+    window.selectStyle = function (style, imageUrl) {
+        console.log("Selected Style:", style);
+        
+        const selectedStyleItem = document.querySelector("#selected-styles .selected-style-item");
+        
+        if (selectedStyleItem) {
+            // img 태그 선택 및 src 업데이트
+            const imgTag = selectedStyleItem.querySelector("img");
+            if (imgTag) {
+                imgTag.src = imageUrl;
+                console.log(`Image src updated to: ${imageUrl}`);
+            } 
+
+            // p 태그 선택 및 텍스트 업데이트
+            const pTag = selectedStyleItem.querySelector("p");
+            if (pTag) {
+                pTag.textContent = style; // style 변수 값으로 업데이트
+                console.log(`Paragraph text updated to: ${style}`);
+            } 
+        } 
+    };
 });

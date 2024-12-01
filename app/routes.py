@@ -23,7 +23,6 @@ def get_style_preview_images():
             if images:
                 # 'static/reference/style_name/image.jpg' 형식으로 저장
                 style_previews[style] = f"reference/{style}/{images[0]}"
-
     return style_previews
 
 # 특정 폴더 하위의 모든 폴더 이름 가져오기 함수
@@ -38,9 +37,8 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@main.route('/', methods=['GET', 'POST'])
-def index():
-
+@main.route('/main', methods=['GET'])
+def main_page():
     # 스타일 세트를 가져와 템플릿에 전달
     style_sets = get_style_sets()  # 'styles' 폴더 내 모든 폴더 이름을 리스트로 가져옴
 
@@ -103,6 +101,10 @@ def index():
             flash('Allowed file types are png, jpg, jpeg, gif')
             return redirect(request.url)
     return render_template('index.html', style_sets=style_sets, style_previews=style_previews) # render_template를 통해 html과 연결
+
+@main.route('/', methods=['GET', 'POST'])
+def index():
+    return render_template('main.html')
 
 if __name__ == "__main__":
     a = get_style_preview_images()

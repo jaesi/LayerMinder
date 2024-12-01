@@ -20,8 +20,8 @@ def main():
     furniture_image_set = "wooden_chair" # type of furniture to create
     furniture = str.split(furniture_image_set, '_')[1] # type of furniture to create
    
-    essence_image_folder = os.path.join("00_ref", essence_image_set)
-    furniture_image_folder = os.path.join("00_ref", furniture_image_set)
+    essence_image_folder = os.path.join("app/static/reference", essence_image_set)
+    furniture_image_folder = os.path.join("app/static/reference", furniture_image_set)
     output_folder = os.path.join("88_output", f'{essence_image_set}X{furniture_image_set}')
     os.makedirs(output_folder, exist_ok=True)
     
@@ -38,7 +38,7 @@ def main():
         for i in range(length): # 이미지 세 장 생성
             timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
             generated_image_path = os.path.join(output_folder, f"{timestamp}_{essence_image_set}_{furniture_image_set}.png")
-            generate_image_from_prompt(combined_image_path, generated_image_path, furniture) 
+            generate_image_from_prompt(combined_image_path, generated_image_path) 
             count += 1
             print(f"{count}/{length}")
 

@@ -27,7 +27,7 @@
 
         // DOM 로드 후 타이핑 효과 시작
         document.addEventListener("DOMContentLoaded", function() {
-            const descriptionText = "{{ description | e }}"; // 서버에서 전달된 description
+            const descriptionText = `{{ description | e }}`; // 서버에서 전달된 description
             const typingElement = document.getElementById("typing-effect");
             typeEffect(typingElement, descriptionText, 50); // 속도를 조정하고 시작 (50ms)
         });
