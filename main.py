@@ -1,6 +1,6 @@
 import os
 import datetime
-from app.image_processing import random_pair
+from image_processing import random_pair, random_image
 from ai_generation import generate_image_from_prompt, image_to_base64, describe_furniture
 # from make_drawing import create_furniture_top_view
 
@@ -25,20 +25,22 @@ def main():
     output_folder = os.path.join("88_output", f'{essence_image_set}X{furniture_image_set}')
     os.makedirs(output_folder, exist_ok=True)
     
-    cycle = 8
+    cycle = 4
     length = 3
     
     for a in range(cycle):   
         # 1. 이미지 두 개를 무작위로 선택하고 결합
-        combined_image_path = random_pair(essence_image_folder, furniture_image_folder, output_folder)
+        # combined_image_path = random_pair(essence_image_folder, furniture_image_folder, output_folder)
 
+        # 1-1. 그냥 지정한 폴더에서 랜덤한 하나의 사진을 가져오기 
+        selected_image = random_image(essence_image_folder)
         # 2. Stability AI를 사용하여 새로운 가구 이미지 생성
         count = 0
 
         for i in range(length): # 이미지 세 장 생성
             timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
             generated_image_path = os.path.join(output_folder, f"{timestamp}_{essence_image_set}_{furniture_image_set}.png")
-            generate_image_from_prompt(combined_image_path, generated_image_path, furniture) 
+            generate_image_from_prompt(selected_image, generated_image_path) 
             count += 1
             print(f"{count}/{length}")
 

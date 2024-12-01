@@ -11,6 +11,13 @@ OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 
 # Stability AI를 사용하여 새로운 이미지 생성
 
+chair_prompt = '''
+A sleek, ergonomic object designed for comfortable (seating:1.0). 
+One person could sit on.
+It features a smooth, curved (backrest:0.9) linked to seat, four sturdy (legs:0.9), and a cushioned surface. 
+The design emphasizes minimalism and modern aesthetics, using polished wood and soft fabric materials.
+'''
+
 def generate_image_from_prompt(image_path, output_path):
 
     # Stability AI API
@@ -25,15 +32,16 @@ def generate_image_from_prompt(image_path, output_path):
         },
         data={
             "prompt": f'''
-            Combine these two image into one thing that one can sit on.
-            All materials should be wood or 90% wood (0.9). 
-            Details should be minimalistic and bold(0.8), with a clean, modern(0.9) aesthetic.
+            Combine these two image into (one:1.0) thing. 
+            Details should be minimalistic and (bold:0.8), with a clean, (modern:0.9) aesthetic.
             Take the key design concepts from the given image.
             Keep it rectangular and simple.
             Maintain the top surface's original shape.
-            The final image should be on against a clean white studio background with soft, even lighting.
+            The final image should be on against a clean dark studio background with soft, even lighting.
+            {chair_prompt}
             ''',
            'negative_prompt': '''
+            Do not seperate image in one image.
            ''',
            'fidelity': 0.9,
 
