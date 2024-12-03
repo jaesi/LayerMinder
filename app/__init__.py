@@ -13,6 +13,7 @@ def create_app():
 
     # 비밀 키 설정 (환경 변수 사용 권장)
     secret_key = os.environ.get('SECRET_KEY')
+    
     if not secret_key:
         raise RuntimeError("SECRET_KEY 환경 변수가 설정되지 않았습니다.")
     app.config['SECRET_KEY'] = secret_key

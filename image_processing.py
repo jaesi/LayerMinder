@@ -2,6 +2,7 @@ import os
 import random
 from PIL import Image
 import datetime
+import shutil
 
 # 이미지 컨케터
 def image_concater(first_image_path, second_image_path, output_path):
@@ -60,7 +61,6 @@ def random_pair(first_image_set, second_image_set, output_folder):
     return output_path
 
 # 사용자 이미지와 스타일 세트 이미지 결합 함수
-
 def combine_with_style(user_image_path, style_image_set_folder, output_folder):
     try:
         # 스타일 세트 폴더에서 랜덤 이미지 선택
@@ -82,8 +82,6 @@ def combine_with_style(user_image_path, style_image_set_folder, output_folder):
         print(f"스타일 이미지 결합 중 오류 발생: {e}")
         raise
     return output_path
-
-
 
 # Randomly selects single image in a folder
 def random_image(input_folder):
