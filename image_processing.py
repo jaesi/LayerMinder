@@ -82,3 +82,18 @@ def combine_with_style(user_image_path, style_image_set_folder, output_folder):
         print(f"스타일 이미지 결합 중 오류 발생: {e}")
         raise
     return output_path
+
+
+
+# Randomly selects single image in a folder
+def random_image(input_folder):
+    folder = os.listdir(input_folder)
+    # randomly select
+    random_selection = random.choice(folder)
+    random_addr = os.path.join(input_folder, random_selection)
+    # copy image to generation folder let to know what's been used
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M")
+    output_path = f'88_output/{timestamp}_combined.png'
+    shutil.copy2(random_addr, output_path)
+    print("image source copied!")
+    return random_addr

@@ -36,10 +36,5 @@
    - ChatGPT Vision API 정상 작동
    - 로딩 프로세스 시각화: 이미지 결합 중 -> 
 
-
-<br>
-
-# 이미지를 
-
-![Alt Text](88_output\wooden_chairXwooden_chair\20240922_154931_wooden_chair_wooden_chair.png)
-(생성된 이미지 예시)
+해야할 것들: 이미지 + 타입을 넣으면 만들어주는게 얼마나 정밀하게 가능한지에 대한 것들
+이미지 + 타입에 대한 프롬프트로 구현을 최대한 해보자
