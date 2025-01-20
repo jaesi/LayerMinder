@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+<!-- layout.html에서 상속을 받아 구조를 기반으로 한다-->
+{% block content %}
+<!-- layer minder 로고 -->
+<header class="header">
+    <div class="header-content">
+        <div class="logo">
+            <img src="{{url_for('static', filename='images/Logo/Title.png')}}" alt="Layer Minder">
+            <img src="{{url_for('static', filename='images/Logo/Logo.png')}}" alt="Layer Minder-logo">
+            <span class="beta-tag">Beta</span>
+        </div>
+    </div>
+</header>
+
+<!-- 로딩 오버레이 (화면 전체를 덮는 반투명 배경 + 스피너) -->
+<!-- <div id="loading-overlay" class="loading-overlay hidden">
+    <div class="spinner"></div>
+    <p>Generating images, please wait...</p>
+</div> -->
+
+<!-- 로딩 오버레이 (원하는 로고 디자인) -->
+<div id="loading-overlay" class="loading-overlay hidden">
+    <!-- 배경 or 반투명 처리 -->
+    <div class="loader-logo">
+      <!-- 동그라미1 -->
+      <img src="{{ url_for('static', filename='images/Logo/The-Future.png') }}"
+           alt="circle1"
+           class="circle circle1">
+      <!-- 동그라미2 -->
+      <img src="{{ url_for('static', filename='images/Logo/Humanity.png') }}"
+           alt="circle2"
+           class="circle circle2">
+      <!-- 동그라미3 -->
+      <img src="{{ url_for('static', filename='images/Logo/The-Present.png') }}"
+           alt="circle3"
+           class="circle circle3">
+      <!-- 동그라미4 -->
+      <img src="{{ url_for('static', filename='images/Logo/The-Past.png') }}"
+           alt="circle4"
+           class="circle circle4">
+    </div>
+  </div>
+  
+  
+<!-- 전체 레이아웃 컨테이너 -->
+<div class="container">
+    <!-- 좌측 사이드바 -->
+    <aside class="sidebar">
+        <!-- 폼 태그 시작 -->
+        <form id="generate-form" enctype="multipart/form-data">
+            <!-- 파일 업로드 섹션 -->
+            <div class="upload-section">
+                <h3 class="image-upload">Image Upload</h3>
+                <div draggable="true" class="drop-area" id="drop-area">
+                    <img src="/static/upload-icon.png" alt="Upload Icon" class="upload-icon">
+                    <p>Drop picture here or 
+                       <label for="image" class="browse-link">Browse</label>
+                    </p>
+                    <input 
+                        type="file" 
+                        id="image" 
+                        name="image" 
+                        accept="image/*" 
+                        required 
+                        style="display:none;"
+                    >
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- 스타일 선택 영역 -->
+            <div class="style-selection">
+                <h3>Select Style</h3>
+                <div class="style-carousel">
+                    <div class="style-carousel-inner">
+                        {% for style in style_sets %}
+                            <div class="style-item"
+                                 data-style="{{ style }}"
+                                 data-src="{{ url_for('static', filename=style_previews[style]) }}"
+                                 onclick="selectStyle(this.dataset.style, this.dataset.src, this)"
+                                 >
+                                <img 
+                                    src="{{ url_for('static', filename=style_previews[style]) }}" 
+                                    alt="{{ style }}" />
+                                <p>{{ style }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- 선택된 스타일을 서버로 전송할 숨겨진 입력 필드 -->
+            <input type="hidden" name="style_set" id="style_set"> 
+
+            <!-- 이미지 생성 버튼 -->
+            <button 
+                type="submit" 
+                name="action" 
+                value="generate" 
+                class="generate-button"
+            >
+                Generate
+            </button>
+        </form>
+        <!-- 폼 태그 끝 -->
+    </aside>
+
+    <!-- 우측 메인 영역 -->
+    <main class="main-area">
+        <!-- 필요시: 미리보기 화면, 결과물, 편집 도구 등 -->
+        <!-- <h2>여기가 이미지생성 영역입니다</h2>
+        <p>추가로 표시할 내용 또는 편집 화면이 들어갈 수 있습니다.</p> -->
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+{% endblock %}

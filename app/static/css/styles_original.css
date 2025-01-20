@@ -1,0 +1,181 @@
+/* styles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard';
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.container {
+    width: 70%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.header {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+    width: 100%; /* 전체 너비 */
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+}
+
+.header h1 {
+    font-family: 'Pretendard SemiBold';
+    font-style: normal;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.upload-section {
+    width: 100%; /* 전체 너비를 사용 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.drop-area {
+    width: 80%; /* 중앙에 위치한 실제 드롭 영역의 너비 */
+    max-width: 400px; /* 드롭 영역의 최대 너비 */
+    background-color: #f5f5f5; /* 배경색을 이곳에만 적용 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 40px;
+    color: #666;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+
+.drop-area.dragging {
+    background-color: #f0f8ff;
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 300px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+.upload-icon {
+    width: 16px;
+    margin-bottom: 10px;
+}
+
+.drop-area p {
+    font-size: 10px;
+    color: #333;
+}
+
+.browse-link {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.style-selection {
+    margin: 60px 0;
+    justify-content: center;
+
+}
+
+.style-selection h3 {
+    font-family: 'Pretendard', sans-serif; /* 폰트 설정 */
+    font-size: 13px; /* 폰트 크기 */
+    font-weight: bold;
+    width: 80%; /* Drop Area와 동일한 폭 */
+    max-width: 400px; /* Drop Area와 동일한 최대 너비 */
+    margin: 0 auto; /* 가운데 정렬 */
+    text-align: left;
+    margin-top: 20px;
+}
+
+.style-carousel {
+    display: flex;
+    overflow-x: auto; /* 가로 스크롤 가능 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    padding: 10px 0;
+}
+
+.style-carousel-inner {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* 아이템 간격 */
+}
+
+.style-item {
+    display: inline-block;
+    align-items: center;
+    text-align: center;
+}
+
+.style-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.style-item p {
+    font-size: 12px;
+    font-family: Pretendard;
+    font-weight: bold;
+    color: #474747;
+    margin-top: 5px;
+}
+.selected-style-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px; /* 선택적: 박스에 둥근 모서리 */
+    padding: 10px; /* 선택적: 이미지 주변 여백 */
+}
+
+.selected-style-item img {
+    max-width: 100%; /* 이미지가 컨테이너를 벗어나지 않도록 */
+    max-height: 100px; /* 이미지 높이 제한 */
+}
+
+.generate-button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.generate-button:hover {
+    background-color: #555;
+}
