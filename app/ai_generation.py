@@ -30,7 +30,7 @@ def generate_image_from_prompt(image_path, output_path):
         },
         data={
             "prompt": f'''
-            Combine these two image into one thing that one can sit on.
+            Combine these two image into one furniture.
             All materials should be wood or 90% wood (0.9). 
             Details should be minimalistic and bold(0.8), with a clean, modern(0.9) aesthetic.
             Take the key design concepts from the given image.

@@ -242,56 +242,65 @@ body {
   ---------------------------------- */
   .loading-overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: rgba(255,255,255,0.8); /* 반투명 배경 */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;  /* 로딩이 최상위에 표시되게 */
   }
-  
+  /* display: flex;
+  gap: 8px;   */
   .loader-logo {
-    display: flex;
-    gap: 8px;       /* 동그라미 간격 */
+    position: relative;
+    width: 200px;
+    height: 200px;
   }
   
   /* 공통 스타일 (크기, 기본 투명도, 애니메이션) */
-  .circle1 {
-    width: auto;
-    height: auto;
-    max-width: 30px;
+  .circle {
+    position: absolute;
     opacity: 0.3;
-    animation: blink 1.4s infinite ease-in-out;
-  }
-
-  .circle2 {
-    width: auto;
-    height: auto;
-    max-width: 30px;
-    opacity: 0.3;
-    animation: blink 1.4s infinite ease-in-out;
-  }
-  .circle3 {
-    width: auto;
-    height: auto;
-    max-width: 30px;
-    opacity: 0.3;
-    animation: blink 1.4s infinite ease-in-out;
-  }
-  .circle4 {
-    width: auto;
-    height: auto;
-    max-width: 30px;
-    opacity: 0.3;
-    animation: blink 1.4s infinite ease-in-out;
+    animation: blink 1.5s infinite ease-in-out;
+    object-fit: contain;
   }
   
   /* 각각 시간차를 두어 깜빡이게 */
-  .circle1 { animation-delay: 0.0s; }
-  .circle2 { animation-delay: 0.2s; }
-  .circle3 { animation-delay: 0.4s; }
-  .circle4 { animation-delay: 0.6s; }
+  .circle1 { 
+      width: auto;
+      max-height: 50px;
+      top: 0;
+      left: 30%;
+      transform: translateX(-50%);
+      animation-delay: 0s;
+  }
+  .circle2 { 
+      width: 70px;
+      max-height: 70px;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: 0.3s;
+  }
+  .circle3 { 
+      width: 50px;
+      max-height: 50px;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      animation-delay: 0.6s;
+  }
+  .circle4 { 
+      width: 100px;
+      max-height: 100px;
+      top: 40%;
+      right: 0;
+      transform: translateY(-50%);
+      animation-delay: 0.9s;
+  }
   
   @keyframes blink {
     0%   { opacity: 0.3; }
