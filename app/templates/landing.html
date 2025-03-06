@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layer Minder Beta</title>
-    <link rel="styleseet" href="{{ url_for('static', filename='css/landing.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css')}}">
 </head>
 <body>
     <header>
@@ -15,7 +15,29 @@
             <h2><a href="/main">Start Designing ➡</a></h2>
         </div>
     </header>
-    <section class="image-grid">
-    </section>
+   
+  <!-- 우측 상단 동그라미 아이콘 -->
+  <div class="top-right-icon" id="login-icon"></div>
+
+  <!-- 팝업 오버레이 -->
+  <div class="popup-overlay" id="popup-overlay">
+    <div class="popup-content">
+      <span class="close-btn" id="popup-close">&times;</span>
+      <h2>Login / Sign Up</h2>
+
+      <input type="email" id="email-input" placeholder="Email">
+      <input type="password" id="password-input" placeholder="Password">
+
+      <button id="login-btn">Login</button>
+      <button id="signup-btn">Sign Up</button>
+      <button id="google-login-btn" class="google-btn">Login with Google</button>
+    </div>
+  </div>
+
+  <!--1) Firebase init(type="module")-->
+  <script type="module" src="{{ url_for('static', filename='firebase-init.js') }}"></script>
+
+  <!-- 2) 로그인 로직 (type="module") -->
+  <script  type="module" src="{{ url_for('static', filename='login.js') }}"></script>
 </body>
 </html>

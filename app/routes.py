@@ -11,8 +11,6 @@ import uuid
 from flask import jsonify
 
 
-
-
 main = Blueprint('main', __name__)
 
 # 가구 스타일과 해당 폴더의 첫 번째 이미지 경로를 가져오는 함수
