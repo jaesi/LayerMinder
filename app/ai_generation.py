@@ -53,7 +53,6 @@ def generate_image_from_prompt(image_path, output_path):
 
 
 
-
 # image to url
 def image_to_base64(image_path):
     # MIME 타입 추론
@@ -113,6 +112,12 @@ def describe_furniture(image_url):
 
     except Exception as e:
         raise Exception(f"설명 생성 실패: {e}")
+
+
+# Random Image from the folder
+def random_image(image_folder):
+    image_list = os.listdir(image_folder)
+    return os.path.join(image_folder, random.choice(image_list))
 
 
 # Vision API만 TEST

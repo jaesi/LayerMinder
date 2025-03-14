@@ -84,3 +84,9 @@ def combine_with_style(user_image_path, style_image_set_folder, output_folder): 
         print(f"스타일 이미지 결합 중 오류 발생: {e}")
         raise
     return output_path
+
+
+# Random Image from the folder
+def random_image(image_folder):
+    image_list = os.listdir(image_folder)
+    return os.path.join(image_folder, random.choice(image_list))
