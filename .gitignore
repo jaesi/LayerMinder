@@ -10,7 +10,7 @@ app/static/images/output/
 .vscode/
 
 # macOS에서 생성하는 파일
-.DS_Store
+**/.DS_Store
 
 # 예전에 이미지를 수동으로 생성할 때 사용하던 경로
 88_output/ 
