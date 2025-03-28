@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // -----------------------------
+
     // 1) 변수 잡기
-    // -----------------------------
     const dropArea = document.getElementById("drop-area");
     const fileInput = document.getElementById("image"); 
     const styleInput = document.getElementById("style_set"); // 숨긴 input
@@ -11,9 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const loadingOverlay = document.getElementById("loading-overlay"); // 로딩 오버레이
 
 
-    // -----------------------------
     // 2) 드래그 앤 드롭으로 파일 업로드
-    // -----------------------------
     dropArea.addEventListener("dragover", (event) => {
         event.preventDefault();
         dropArea.classList.add("dragging");
@@ -33,9 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // -----------------------------
     // 3) 파일 선택 시 이미지 미리보기
-    // -----------------------------
     fileInput.addEventListener("change", (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -43,9 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // -----------------------------
     // 4) 이미지 미리보기 함수
-    // -----------------------------
     function displayImage(file) {
         const reader = new FileReader();
         reader.onload = function (e) {
@@ -75,9 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         reader.readAsDataURL(file);
     }
 
-    // -----------------------------
     // 5) 폼 제출 (Generate) -> AJAX -> 오른쪽 영역에 결과 표시
-    // -----------------------------
     form.addEventListener("submit", function (e) {
         e.preventDefault(); // 기존 폼 이동 막기
         
@@ -114,9 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // -------------------------
             // (A) 기존 결과 지우고 새로 표시
-            // -------------------------
             // mainArea.innerHTML = "";
 
             // 그리드 컨테이너 생성
@@ -135,9 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // .main-area에 그리드 붙이기
             mainArea.appendChild(gridContainer);
 
-            // -------------------------
             // (B) Generate -> Regenerate
-            // -------------------------
             generateBtn.textContent = "Regenerate";
         })
         .catch(err => {
@@ -150,9 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // -----------------------------
     // 6) 스타일 선택 함수
-    // -----------------------------
     window.selectStyle = function (style, imageUrl, clickedElement) {
         console.log("Selected Style:", style);
         

@@ -9,11 +9,12 @@ import datetime
 from PIL import Image
 import uuid
 from flask import jsonify
+from firebase_admin import storage
 
 
 main = Blueprint('main', __name__)
 
-# 가구 스타일과 해당 폴더의 첫 번째 이미지 경로를 가져오는 함수
+# 함수 - 가구 스타일과 해당 폴더의 첫 번째 이미지 경로를 가져오는 함수
 def get_style_preview_images():
     styles_folder = 'app/static/reference'  # 이미지들이 저장된 폴더 경로
     style_previews = {}
@@ -27,21 +28,31 @@ def get_style_preview_images():
                 style_previews[style] = f"reference/{style}/{images[0]}"
     return style_previews
 
-# 특정 폴더 하위의 모든 폴더 이름 가져오기 함수
+# 함수 - 특정 폴더 하위의 모든 폴더 이름 가져오기 함수
 def get_style_sets():
     style_dir = 'app/static/reference'  
     return [folder for folder in os.listdir(style_dir) if os.path.isdir(os.path.join(style_dir, folder))]
 
-# 업로드 가능한 파일 확장자 제한
+# 함수 - 업로드 가능한 파일 확장자 제한
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# 함수 - Firebase에 업로드 함수
+def upload_to_firebase(local_path, remote_path):
+    bucket = storage.bucket()
+    blob = bucket.blob(remote_path)
+    blob.upload_from_filename(local_path)
+    blob.make_public # URL 공개 설정
+    return blob.public_url
+
+## 01 랜딩 페이지
 @main.route('/')
 def index():
     return render_template('landing.html')
 
+## 02 생성 페이지
 @main.route('/main', methods=['GET', 'POST'])
 def main_page():
     style_sets = get_style_sets()
@@ -76,11 +87,12 @@ def main_page():
                          style_sets=style_sets, 
                          style_previews=style_previews)
 
+## 03 결과 페이지
 @main.route('/result')
 def result_page():
     try:
         # main_page에서 저장한 파일의 경로와 스타일 정보를 사용
-        input_path = os.path.join('app', 'static', 'images', 'input')
+        input_path = 'app/static/images/input'
         files = os.listdir(input_path)
         
         if not files:  # 입력 파일이 없으면
@@ -91,7 +103,7 @@ def result_page():
         
         # 출력 파일 경로 설정
         output_filename = f"output_{os.path.basename(latest_file)}"
-        output_path = os.path.join('app', 'static', 'images', 'output', output_filename)
+        output_path = os.path.join('app/static/images/output', output_filename)
         
         # 이미지 생성
         style_dir = os.path.join('app/static/reference', request.form.get('style_set', ''))

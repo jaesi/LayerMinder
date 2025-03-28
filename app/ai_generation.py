@@ -6,19 +6,16 @@ import base64
 import mimetypes
 import openai
 
+# 환경변수 로드
 load_dotenv()
 STABILITY_KEY = os.getenv('STABILITYAI_API_KEY')
 OPENAI_KEY = os.getenv("OPENAI_API_KEY")
-
-
 if not OPENAI_KEY:
     raise RuntimeError("OPENAI_API_KEY 환경 변수가 설정되지 않았습니다.")
-
 openai.api_key = OPENAI_KEY
 
-# Stability AI를 사용하여 새로운 이미지 생성
+# Stability AI 활용 이미지 생성 
 def generate_image_from_prompt(image_path, output_path):
-    # Stability AI API
     response = requests.post(
         "https://api.stability.ai/v2beta/stable-image/control/style",
         headers={
@@ -44,11 +41,11 @@ def generate_image_from_prompt(image_path, output_path):
             "output_format": "png"
         },
     )
-    if response.status_code == 200: # successes -> file save 
+    if response.status_code == 200: # success
         with open(output_path, 'wb') as file:
             file.write(response.content)
         print(f"Image saved successfully: {output_path}")
-    else: # error -> print error message
+    else: 
         raise Exception(str(response.json()))
 
 
@@ -66,7 +63,7 @@ def image_to_base64(image_path):
     return f"data:{mime_type};base64,{encoded_string}"
     
 
-# OpenAI를 사용하여 이미지 설명 생성
+# OpenAI - 이미지 설명 생성
 def describe_furniture(image_url):
     """
     OpenAI API를 사용하여 이미지에 대한 설명을 생성하는 함수
@@ -112,12 +109,6 @@ def describe_furniture(image_url):
 
     except Exception as e:
         raise Exception(f"설명 생성 실패: {e}")
-
-
-# Random Image from the folder
-def random_image(image_folder):
-    image_list = os.listdir(image_folder)
-    return os.path.join(image_folder, random.choice(image_list))
 
 
 # Vision API만 TEST

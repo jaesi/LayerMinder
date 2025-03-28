@@ -17,11 +17,12 @@ from app.ai_generation import generate_image_from_prompt, image_to_base64, descr
 # 5. Desk
 # 6. Lighting
 
-def main(cycle=4, length=3):
+def main(cycle=3, length=3):
     # 폴더 이름 설정
-    essence_image_set = "Zen Style" ################## <<<--- Change this #1
-    furniture_image_set = "wood_coffeetable" ################## <<<--- Change this #2 must include the type of furniture ex) wood_coffeetable
-    furniture = str.split(furniture_image_set, '_')[1] # type of furniture to create
+    essence_image_set = "1" ################## <<<--- Change this #1
+    furniture_image_set = "industrial" ################## <<<--- Change this #2 must include the type of furniture ex) wood_coffeetable
+    # furniture = str.split(furniture_image_set, '_')[1] # type of furniture to create
+    furniture = ''
    
     essence_image_folder = os.path.join("app/static/reference", essence_image_set)
     furniture_image_folder = os.path.join("app/static/reference", furniture_image_set)
